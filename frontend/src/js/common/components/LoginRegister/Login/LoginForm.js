@@ -12,12 +12,12 @@ const LoginForm = (props) => {
             onSubmit={handleSubmit}
         >
             <div className="form-group has-feedback">
-                <label htmlFor="username">Usuario</label>
+                <label htmlFor="username">Email</label>
                 <Field
-                    name="username"
-                    label="Usuario"
+                    name="email"
+                    label="Email"
                     component={renderField}
-                    type="text"
+                    type="email"
                     className="form-control"
                 />
             </div>

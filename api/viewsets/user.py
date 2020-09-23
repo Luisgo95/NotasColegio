@@ -3,7 +3,8 @@ import json
 from django.core.files import File
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from api.models.m_users import User
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -11,11 +12,11 @@ from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
 from api.models import Profile
-from api.serializers import UserSerializer, UserReadSerializer
+from api.serializers.user import UserSerializer, UserReadSerializer,UserSerializerCrear
 
 
 class UserViewset(viewsets.ModelViewSet):
-    queryset = User.objects.filter(is_active=True)
+    queryset = User.objects.all()
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("username", "first_name")
@@ -31,17 +32,18 @@ class UserViewset(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """" Define permisos para este recurso """
-        if self.action == "create" or self.action == "token":
+        if self.action in['list', 'create', 'token', 'verification']:
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        print("desde crear usuario", request.data)
+        serializer = UserSerializerCrear(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        usuario = User.objects.get(username=request.data["username"])
+        usuario = User.objects.get(email=request.data["email"])
         usuario.set_password(request.data["password"])
         usuario.save()
         headers = self.get_success_headers(serializer.data)
@@ -100,7 +102,7 @@ class UserViewset(viewsets.ModelViewSet):
     def token(self, request, *args, **kwargs):
         data = request.data
         try:
-            user = User.objects.get(username=data["username"])
+            user = User.objects.get(email=data["email"])
             if user.check_password(data["password"]):
                 token, created = Token.objects.get_or_create(user=user)
                 serializer = UserReadSerializer(user)

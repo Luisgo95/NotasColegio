@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from api.models import Profile
 
-
+from api.models.m_users import User
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserReadSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(required=False)
+    # profile = ProfileSerializer(required=False)
 
     class Meta:
         model = User
@@ -33,8 +33,17 @@ class UserReadSerializer(serializers.ModelSerializer):
             'username',
             'first_name',
             'last_name',
-            'is_superuser',
-            'is_staff',
             'email',
-            'profile',
-        )
+         )
+class UserSerializerCrear(serializers.ModelSerializer):
+    # profile = ProfileSerializer(required=False)
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+         )

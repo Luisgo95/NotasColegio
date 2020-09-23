@@ -47,6 +47,16 @@ const RegisterForm = (props) => {
                 />
             </div>
             <div className="form-group has-feedback">
+                <label htmlFor="email">Email</label>
+                <Field
+                    name="email"
+                    label="Usuario"
+                    component={renderField}
+                    type="email"
+                    className="form-control"
+                />
+            </div>
+            <div className="form-group has-feedback">
                 <label htmlFor="password">Contraseña</label>
                 <Field
                     name="password"
