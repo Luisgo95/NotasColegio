@@ -11,7 +11,8 @@ class User(AbstractUser):
     Used the AbstractUser as it's base and Utilities
     extend the functionality.
     """
-
+    first_name =models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
     username = models.CharField(max_length=15, null=True, blank=True,default = None)
 
     email = models.CharField(

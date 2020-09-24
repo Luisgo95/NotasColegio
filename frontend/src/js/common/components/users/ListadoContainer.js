@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { actions } from '../../../redux/modules/roles/roles';
-import Listado from './ListadoRol';
+import { actions } from '../../../redux/modules/usuarios/usuarios2';
+import Listado from './ListadoUsuario';
 
 const ms2p = (state) => {
     return {
-        ...state.roles,
+        ...state.usuarios,
     };
 };
 

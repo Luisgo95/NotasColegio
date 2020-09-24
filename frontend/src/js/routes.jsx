@@ -19,6 +19,13 @@ import ExampleTabs from './common/components/Examples/Tabs/Tabs';
 require('../style/index.css');
 import Rol from './common/components/Roles/ListadoContainer';
 import CrearRol from './common/components/Roles/CrearRolContainer';
+
+import Cursos from './common/components/Cursos/ListadoContainer';
+import CrearCursos from './common/components/Cursos/CrearCursoContainer';
+
+import Usuarios from './common/components/users/ListadoContainer';
+import CrearUsuarios from './common/components/users/CrearUsuarioContainer';
+
 module.exports = (
     <div>
         <div className="container__content">
@@ -39,7 +46,7 @@ module.exports = (
                     component={Notificaciones}
                 />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
-                <Route component={NotFound} />
+
                 <ProtectedRoute exact path="/roles" component={Rol} />
                 <ProtectedRoute
                     exact
@@ -56,6 +63,42 @@ module.exports = (
                     path="/roles/create"
                     component={CrearRol}
                 />
+                {/* //************Cursos**************** * */}
+                <ProtectedRoute exact path="/cursos" component={Cursos} />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/:id/ver"
+                    component={CrearCursos}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/:id/editar"
+                    component={CrearCursos}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/create"
+                    component={CrearCursos}
+                />
+                {/* ********************CrearUsuarios************* */}
+                <ProtectedRoute exact path="/usuarios" component={Usuarios} />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/:id/ver"
+                    component={CrearUsuarios}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/:id/editar"
+                    component={CrearUsuarios}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/create"
+                    component={CrearUsuarios}
+                />
+
+                <Route component={NotFound} />
             </Switch>
         </div>
         <NotificationContainer />

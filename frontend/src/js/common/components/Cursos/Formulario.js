@@ -9,7 +9,7 @@ import {
 import { renderField, renderNumber } from '../Utils/renderField';
 import { phone } from '../../../utility/validation';
 
-const RolForm = (props) => {
+const CursoForm = (props) => {
     const { handleSubmit, actualizar, ver } = props;
 
     return (
@@ -24,7 +24,7 @@ const RolForm = (props) => {
                 >
                     <div>
                         <h3 className="m-0 txt-35-n color-003">
-                            {actualizar ? 'Actualizar' : 'Crear'} Rol
+                            {actualizar ? 'Actualizar' : 'Crear'} Curso
                         </h3>
                     </div>
 
@@ -37,13 +37,23 @@ const RolForm = (props) => {
                                 disabled={ver}
                             />
                         </div>
+                        <div className="form-group has-feedback flex-1 mb-4">
+                            <label className="txt-18-n color-057">
+                                Descripcion
+                            </label>
+                            <Field
+                                component={renderField}
+                                name="descripcion"
+                                disabled={ver}
+                            />
+                        </div>
                     </div>
                     <br />
                     <br />
                     <div className=" d-flex justify-content-center">
                         <a
                             className="btn btn-danger btn-sm mr-1"
-                            href="/#/roles"
+                            href="/#/cursos"
                         >
                             Cancelar
                         </a>
@@ -63,5 +73,5 @@ const RolForm = (props) => {
 };
 
 export default reduxForm({
-    form: 'RolForm', // a unique identifier for this form
-})(RolForm);
+    form: 'CursoForm', // a unique identifier for this form
+})(CursoForm);

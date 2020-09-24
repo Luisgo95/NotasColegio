@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { TableHeaderColumn } from 'react-bootstrap-table';
 import Grid from '../Utils/Grid';
 import { standardActions } from '../Utils/Grid/StandardActions';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class Rol extends Component {
     componentWillMount = () => {
@@ -27,14 +25,14 @@ class Rol extends Component {
         return (
             <div className="mb-4 card card-small p-4">
                 <div className="d-flex flex-wrap mb-2  mt-2">
-                    <h3 className="txt-35-n color-003 w-50">Roles</h3>
+                    <h3 className="txt-35-n color-003 w-50">Cursos</h3>
 
                     <div className="d-flex flex-row justify-content-between align-items-center flex-fill ">
                         <a
                             className="btn btn-primary btn-sm mr-1"
-                            href="/#/roles/create"
+                            href="/#/cursos/create"
                         >
-                            Agregar Rol
+                            Agregar Curso
                         </a>
                         <div className="flex-fill d-flex align-items-center ml-3">
                             <input
@@ -68,6 +66,9 @@ class Rol extends Component {
                     <TableHeaderColumn isKey dataField="nombre" dataSort>
                         Nombre
                     </TableHeaderColumn>
+                    <TableHeaderColumn dataField="descripcion" dataSort>
+                        Descripcion
+                    </TableHeaderColumn>
                     {/* <TableHeaderColumn dataField="direccion" dataSort>
                         Dirección
                     </TableHeaderColumn> */}
@@ -76,7 +77,7 @@ class Rol extends Component {
                         dataAlign="center"
                         dataSort
                         dataFormat={standardActions({
-                            editar: 'roles',
+                            editar: 'cursos',
                             // ver: "roles",
                             eliminar,
                         })}

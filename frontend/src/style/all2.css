@@ -896,6 +896,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     border-color: #007bff;
     background-color: #007bff;
     box-shadow: none;
+    border-radius: 12px !important;
 }
 
 .btn-primary:hover {
@@ -1091,6 +1092,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     border-color: #c4183c;
     background-color: #c4183c;
     box-shadow: none;
+    border-radius: 12px !important;
 }
 
 .btn-danger:hover {

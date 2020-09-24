@@ -47,3 +47,15 @@ class UserSerializerCrear(serializers.ModelSerializer):
             'email',
             'password',
          )
+class UserSerializerCrearD(serializers.ModelSerializer):
+    # profile = ProfileSerializer(required=False)
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+
+         )
