@@ -38,7 +38,33 @@ const leerCursosAsignados = (id) => (dispatch) => {
             dispatch(setLoader(false));
         });
 };
+const creacion = (data) => (dispatch, getStore) => {
+    console.log('hola desde el redux notas ', data);
+    const estado = getStore();
+    const formData = estado.form.ListadoAsignar;
+    console.log('hola desde el redux notas2 ', estado);
+    // puntos = formData;
+    // const formData2 = formData.registeredFields.punteos.valueOf();
 
+    // const punt = formData.punteos;
+    // console.log('hola desde el redux notas3 ', formData2.valueOf());
+    // for(formData){
+    //     console.log("desdeRecorrido", formData[1])
+    // }
+    // puntos.map((data) => console.log('ciclo ', data));
+    dispatch(setLoader(true));
+    // api.post(endpoint, data)
+    //     .then(() => {
+    //         NotificationManager.success('Registro creado', 'Éxito', 3000);
+    //         if (!!resourceList) dispatch(push(resourceList));
+    //     })
+    //     .catch(() => {
+    //         NotificationManager.error('Error en la creación', 'ERROR');
+    //     })
+    //     .finally(() => {
+    //         dispatch(setLoader(false));
+    //     });
+};
 export const reducers = {
     ...baseReducer.reducers,
     // [SET_DATA]: (state, { data }) => {
@@ -58,11 +84,13 @@ export const reducers = {
 
 export const actions = {
     // ActualizarPropiedad,
+    creacion,
     leerCursosAsignados,
     ...baseReducer.actions,
 };
 export const initialState = {
     ListadoAlumnosAsignados: [],
+
     ...baseReducer.initialState,
 };
 

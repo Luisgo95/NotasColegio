@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Formulario from "./Formulario";
+import React, { Component } from 'react';
+import Formulario from './Formulario';
 
-class CrearRol extends Component {
+class CrearCurso extends Component {
     componentWillMount = () => {
         const { match, leer } = this.props;
         if (match.params.id) {
@@ -26,11 +26,11 @@ class CrearRol extends Component {
                 <Formulario
                     onSubmit={funcionEnvio}
                     actualizar={match.params.id ? true : false}
-                    ver={location.pathname.includes("ver")}
+                    ver={location.pathname.includes('ver')}
                 />
             </div>
         );
     }
 }
 
-export default CrearRol;
+export default CrearCurso;
