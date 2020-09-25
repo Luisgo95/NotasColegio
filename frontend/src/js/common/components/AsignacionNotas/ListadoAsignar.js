@@ -6,7 +6,7 @@ import { Field, reduxForm, FieldArray } from 'redux-form';
 import Grid from '../Utils/Grid';
 // import { standardActions } from '../Utils/Grid/StandardActionsTicket';
 // import Cards from "./Cards";
-import { renderField } from '../Utils/renderField/renderField';
+import { renderField, NumberFormat } from '../Utils/renderField/renderField';
 import LoadMask from '../Utils/LoadMask/LoadMask';
 import Listar from './ListadoNotas';
 const verPuntos = (data) => {

@@ -42,7 +42,13 @@ const creacion = (data) => (dispatch, getStore) => {
     console.log('hola desde el redux notas ', data);
     const estado = getStore();
     const formData = estado.form.ListadoAsignar;
-    console.log('hola desde el redux notas2 ', estado);
+
+    console.log('hola desde el redux notas2 ', formData);
+    // formData.map(array);
+    // formData.map((data) => console.log('mapeando', data));
+    // for (let i = 0; i < 1; i++) {
+    //     console.log('desde for', formData[i]);
+    // }
     // puntos = formData;
     // const formData2 = formData.registeredFields.punteos.valueOf();
 
@@ -52,18 +58,18 @@ const creacion = (data) => (dispatch, getStore) => {
     //     console.log("desdeRecorrido", formData[1])
     // }
     // puntos.map((data) => console.log('ciclo ', data));
-    dispatch(setLoader(true));
-    // api.post(endpoint, data)
-    //     .then(() => {
-    //         NotificationManager.success('Registro creado', 'Éxito', 3000);
-    //         if (!!resourceList) dispatch(push(resourceList));
-    //     })
-    //     .catch(() => {
-    //         NotificationManager.error('Error en la creación', 'ERROR');
-    //     })
-    //     .finally(() => {
-    //         dispatch(setLoader(false));
-    //     });
+    // dispatch(setLoader(true));
+    api.post('notas', formData)
+        .then(() => {
+            NotificationManager.success('Registro creado', 'Éxito', 3000);
+            if (!!resourceList) dispatch(push(resourceList));
+        })
+        .catch(() => {
+            NotificationManager.error('Error en la creación', 'ERROR');
+        })
+        .finally(() => {
+            dispatch(setLoader(false));
+        });
 };
 export const reducers = {
     ...baseReducer.reducers,

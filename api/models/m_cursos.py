@@ -13,7 +13,7 @@ class Cursos(models.Model):
     def __unicode__(self):
         return self.nombre
         
-    def delete(self, *args):        
-        self.activo = False
-        self.save()
-        return True
+    # def delete(self, *args):        
+    #     self.activo = False
+    #     self.save()
+    #     return True

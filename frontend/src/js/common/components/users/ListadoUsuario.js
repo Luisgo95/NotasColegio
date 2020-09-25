@@ -66,11 +66,11 @@ class Rol extends Component {
                     <TableHeaderColumn isKey dataField="email" dataSort>
                         email
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="username" dataSort>
+                    <TableHeaderColumn dataField="first_name" dataSort>
                         Nombre
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField="first_name" dataSort>
-                        first_name
+                    <TableHeaderColumn dataField="last_name" dataSort>
+                        Apellidos
                     </TableHeaderColumn>
                     {/* <TableHeaderColumn dataField="direccion" dataSort>
                         Dirección

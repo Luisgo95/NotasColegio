@@ -132,22 +132,7 @@ const UsuarioForm = (props) => {
                             loadOptions={getCursos}
                             className="form-control"
                             disabled={ver}
-                            // showForm={showForm}
-                            // show_form={show_form}
-                        >
-                            {/* <Modal
-                                    showModal={show_form}
-                                    showForm={() => {
-                                        showForm(false);
-                                    }}
-                                >
-                                    <FormularioPro
-                                        isNested
-                                        showForm={showForm}
-                                        onSubmit={props.registrarProyecto}
-                                    />
-                                </Modal> */}
-                        </Field>
+                        ></Field>
                     </div>
                     <br />
                     <br />

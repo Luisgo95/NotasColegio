@@ -83,7 +83,7 @@ class Rol extends Component {
                             eliminar,
                         })}
                     >
-                        Acciones
+                        Asigna Notas aqui
                     </TableHeaderColumn>
                 </Grid>
             </div>

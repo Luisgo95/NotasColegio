@@ -6,7 +6,7 @@ from api.serializers import CursosAsignacionSerializer,CursosAsignacionadosSeria
 from api.models.m_cursosAsignacion import AsignacionCursosUsuario 
 # from api.utils.permissions import permissionAdmin
 from rest_framework.response import Response
-
+from django.db.models import Count
 class CursosAsignacionUsuarioViewSet(viewsets.ModelViewSet):
     # queryset = AsignacionCursosUsuario.objects.all()
 
@@ -39,6 +39,24 @@ class CursosAsignacionUsuarioViewSet(viewsets.ModelViewSet):
 
         serializer = CursosAsignacionadosSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @action(methods=["get"], detail=False)
+    def listarCursosTotalAlumnos(self, request, *args, **kwargs):
+        # totales = AsignacionCursosUsuario.objects.annotate(numero=Count('idCurso'))
+        totales = AsignacionCursosUsuario.objects.values('idCurso').annotate(numeroAlumnos=Count('idCurso'))
+        totalAlumnos = []
+        print("estos son datos", totales)
+        # for total in totales:
+        #     totalAlumnos.append({
+        #         "idCurso": total.idCurso,
+        #         "Numero de Alumnos": total.numeroAlumnos
+        #     })
+            # print("desde aca ",total.idCurso.nombre)
+        # if(data.get('idTicket__id')):
+        #     queryset = queryset.filter(idTicket__id=data.get('idTicket__id'))
+
+        # serializer = CursosAsignacionadosSerializer(queryset, many=True)
+        return Response({"datos":totales}, status=status.HTTP_200_OK)
 
 
     @action(methods=["get"], detail=False)

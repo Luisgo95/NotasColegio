@@ -32,3 +32,4 @@ class RolesViewSet(viewsets.ModelViewSet):
     #     return [p() for p in permissions]
 
     # @action(detail=True, methods=['post'])    
+    
