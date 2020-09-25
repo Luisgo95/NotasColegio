@@ -27,7 +27,7 @@ class Acciones extends Component {
     };
 
     render() {
-        const { id, ver, editar, eliminar } = this.props;
+        const { id, ver, editar, eliminar, notas } = this.props;
 
         return (
             <div className="d-flex justify-content-center">
@@ -52,6 +52,14 @@ class Acciones extends Component {
                     >
                         <i className="material-icons">delete</i>
                     </a>
+                )}
+                {notas !== undefined && (
+                    <Link
+                        className="text-warning"
+                        to={`${notas}/${id}/asignar`}
+                    >
+                        <i className="material-icons">dashboard</i>
+                    </Link>
                 )}
             </div>
         );

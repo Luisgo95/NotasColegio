@@ -17,7 +17,18 @@ import Grids from './common/components/Examples/Grids';
 import Notificaciones from './common/components/Examples/Notificaciones';
 import ExampleTabs from './common/components/Examples/Tabs/Tabs';
 require('../style/index.css');
+import Rol from './common/components/Roles/ListadoContainer';
+import CrearRol from './common/components/Roles/CrearRolContainer';
 
+import Cursos from './common/components/Cursos/ListadoContainer';
+import CrearCursos from './common/components/Cursos/CrearCursoContainer';
+
+import Usuarios from './common/components/users/ListadoContainer';
+import CrearUsuarios from './common/components/users/CrearUsuarioContainer';
+
+import Notas from './common/components/AsignacionNotas/ListadoContainer';
+
+import CrearNotas from './common/components/AsignacionNotas/CrearNotaContainer';
 module.exports = (
     <div>
         <div className="container__content">
@@ -38,6 +49,79 @@ module.exports = (
                     component={Notificaciones}
                 />
                 <ProtectedRoute exact path="/tabs" component={ExampleTabs} />
+
+                <ProtectedRoute exact path="/roles" component={Rol} />
+                <ProtectedRoute
+                    exact
+                    path="/roles/:id/ver"
+                    component={CrearRol}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/roles/:id/editar"
+                    component={CrearRol}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/roles/create"
+                    component={CrearRol}
+                />
+                {/* //************Cursos**************** * */}
+                <ProtectedRoute exact path="/cursos" component={Cursos} />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/:id/ver"
+                    component={CrearCursos}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/:id/editar"
+                    component={CrearCursos}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/cursos/create"
+                    component={CrearCursos}
+                />
+                {/* ********************CrearUsuarios************* */}
+                <ProtectedRoute exact path="/usuarios" component={Usuarios} />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/:id/ver"
+                    component={CrearUsuarios}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/:id/editar"
+                    component={CrearUsuarios}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/usuarios/create"
+                    component={CrearUsuarios}
+                />
+                {/* *******************CrearNotas********* */}
+                <ProtectedRoute exact path="/notas" component={Notas} />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/ver"
+                    component={CrearNotas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/editar"
+                    component={CrearNotas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/asignar"
+                    component={Notas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/create"
+                    component={CrearNotas}
+                />
                 <Route component={NotFound} />
             </Switch>
         </div>

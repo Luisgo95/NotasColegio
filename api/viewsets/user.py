@@ -3,19 +3,20 @@ import json
 from django.core.files import File
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters, viewsets
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from api.models.m_users import User
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 
-from api.models import Profile
-from api.serializers import UserSerializer, UserReadSerializer
+from api.models import Profile,Roles,Cursos,AsignacionCursosUsuario
+from api.serializers.user import UserSerializer, UserReadSerializer,UserSerializerCrear, UserSerializerCrearD
 
 
 class UserViewset(viewsets.ModelViewSet):
-    queryset = User.objects.filter(is_active=True)
+    queryset = User.objects.all()
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ("username", "first_name")
@@ -31,30 +32,70 @@ class UserViewset(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """" Define permisos para este recurso """
-        if self.action == "create" or self.action == "token":
+        if self.action in['list', 'create', 'token', 'verification']:
             permission_classes = [AllowAny]
         else:
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        usuario = User.objects.get(username=request.data["username"])
-        usuario.set_password(request.data["password"])
-        usuario.save()
+        data = request.data
+        if(data.get("Cursos")):
+            print("desde crear usuario", request.data)
+            serializer = UserSerializerCrearD(data=request.data)
+            idRoles = data.get('idRoles').get('value')
+            rol = Roles.objects.get(pk=idRoles)
+            usuario = User.objects.create(
+                            first_name=data.get('first_name'),
+                            last_name=data.get('last_name'),
+                            email=data.get('email'),
+                            # activo=data.get('activo'),
+                            idRoles=rol
+                        )
+            usuario.set_password("123")
+            usuario.save()
+            cursos =data.get("Cursos", [])
+            print("cursos2",cursos)
+            for curso in cursos:
+                print("cursos2",curso)
+                if(curso.get('__isNew__')):
+                    cursoCreado = Cursos.objects.create(
+                            nombre=curso.get('label'))
+                    print("desde dentro2",curso.get('label'))
+                    AsignacionCursosUsuario.objects.create(
+                    idUsuario=usuario,
+                    idCurso=cursoCreado
+                )
+                else:
+                    cursoAsignado = Cursos.objects.get(pk=curso.get("value"))
+                    AsignacionCursosUsuario.objects.create(
+                        idUsuario=usuario,
+                        idCurso=cursoAsignado
+                )
+            return Response("Creado", status=status.HTTP_201_CREATED)
+
+        else:
+            print("entro aqui?")
+            serializer = UserSerializerCrear(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            usuario = User.objects.get(email=request.data["email"])
+            usuario.set_password(request.data["password"])
+            usuario.save()
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+
     def perform_create(self, serializer):
         serializer.save()
+
 
     def get_success_headers(self, data):
         try:
             return {'Location': str(data[api_settings.URL_FIELD_NAME])}
         except (TypeError, KeyError):
             return {}
+
 
     @action(methods=["put"], detail=False)
     def update_me(self, request, *args, **kwargs):
@@ -100,7 +141,7 @@ class UserViewset(viewsets.ModelViewSet):
     def token(self, request, *args, **kwargs):
         data = request.data
         try:
-            user = User.objects.get(username=data["username"])
+            user = User.objects.get(email=data["email"])
             if user.check_password(data["password"]):
                 token, created = Token.objects.get_or_create(user=user)
                 serializer = UserReadSerializer(user)

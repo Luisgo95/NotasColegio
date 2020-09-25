@@ -2,12 +2,15 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls import url
-from api import viewsets
+from api.viewsets import *
 
 
 router = DefaultRouter()
-router.register(r'user', viewsets.UserViewset)
-
+router.register(r'user', UserViewset, basename='user')
+router.register(r'notas', AsignacionNotasViewSet, basename='notas')
+router.register(r'cursos', CursosViewSet, basename='cursos')
+router.register(r'roles', RolesViewSet,basename='roles')
+router.register(r'cursosAsignados', CursosAsignacionUsuarioViewSet,basename='cursosAsignados')
 
 urlpatterns = [
     path('api/', include(router.urls)),
