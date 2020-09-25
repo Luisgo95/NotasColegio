@@ -8,6 +8,7 @@ import usuarios from './modules/usuarios/usuarios';
 import notificaciones from './modules/notificaciones/notificaciones';
 import roles from './modules/roles/roles.js';
 import cursos from './modules/cursos/cursos.js';
+import notas from './modules/notas/notas.js';
 export default combineReducers({
     form: formReducer,
     login,
@@ -18,4 +19,5 @@ export default combineReducers({
     notificaciones,
     roles,
     cursos,
+    notas,
 });

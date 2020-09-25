@@ -26,6 +26,9 @@ import CrearCursos from './common/components/Cursos/CrearCursoContainer';
 import Usuarios from './common/components/users/ListadoContainer';
 import CrearUsuarios from './common/components/users/CrearUsuarioContainer';
 
+import Notas from './common/components/AsignacionNotas/ListadoContainer';
+
+import CrearNotas from './common/components/AsignacionNotas/CrearNotaContainer';
 module.exports = (
     <div>
         <div className="container__content">
@@ -97,7 +100,28 @@ module.exports = (
                     path="/usuarios/create"
                     component={CrearUsuarios}
                 />
-
+                {/* *******************CrearNotas********* */}
+                <ProtectedRoute exact path="/notas" component={Notas} />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/ver"
+                    component={CrearNotas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/editar"
+                    component={CrearNotas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/:id/asignar"
+                    component={Notas}
+                />
+                <ProtectedRoute
+                    exact
+                    path="/notas/create"
+                    component={CrearNotas}
+                />
                 <Route component={NotFound} />
             </Switch>
         </div>
